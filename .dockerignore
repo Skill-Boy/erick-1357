@@ -1,0 +1,9 @@
+node_modules
+**/node_modules
+dist
+**/dist
+.npm-cache
+.git
+.DS_Store
+*.log
+README.md
