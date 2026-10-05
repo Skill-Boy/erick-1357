@@ -11,7 +11,7 @@ const frontendDirectory = join(__dirname, 'public')
 
 app.use(cors())
 app.use(express.json())
-app.get('/', (_req: Request, res: Response) => {
+app.get('/alive', (_req: Request, res: Response) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
