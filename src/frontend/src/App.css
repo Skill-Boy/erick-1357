@@ -87,9 +87,9 @@ input:focus { outline: 3px solid rgba(11, 77, 187, .16); border-color: #0b4dbb; 
 .legend i { display: inline-block; width: .58rem; height: .58rem; margin-right: .3rem; border-radius: 50%; }
 .win-dot { background: #0b4dbb; }.loss-dot { background: #f59622; }.legend strong { color: #172033; }
 .bar-chart { display: flex; align-items: end; justify-content: space-between; gap: .65rem; height: 205px; padding: 1.6rem .35rem 0; }
-.bar-column { display: grid; flex: 1; height: 100%; grid-template-rows: 1rem 1fr 1.25rem; align-items: end; color: #53647c; font-size: .68rem; text-align: center; }
-.bar-value { color: #30415a; font-weight: 700; }
-.bar-track { display: flex; align-items: end; width: min(30px, 100%); height: 100%; margin: .4rem auto; background: #edf2f8; border-radius: .32rem .32rem 0 0; }
+.bar-column { display: grid; flex: 1; height: 100%; grid-template-rows: 1.5rem minmax(0, 1fr) 1.5rem; align-items: stretch; color: #53647c; font-size: .68rem; text-align: center; }
+.bar-value { align-self: end; padding-bottom: .45rem; color: #30415a; font-weight: 700; line-height: 1; }
+.bar-track { display: flex; align-items: end; width: min(30px, 100%); height: 100%; margin: 0 auto; background: #edf2f8; border-radius: .32rem .32rem 0 0; }
 .bar-track i { width: 100%; min-height: 0; border-radius: .32rem .32rem 0 0; box-shadow: 0 3px 6px rgba(39, 59, 89, .14); }
 
 .payment-section { display: grid; grid-template-columns: minmax(16rem, .9fr) minmax(20rem, 1.1fr); gap: 2.25rem; margin-top: 1.35rem; padding: 1.5rem; }

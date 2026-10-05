@@ -15,7 +15,9 @@
     "build:backend": "npm --workspace=src/backend run build",
     "build:frontend": "npm --workspace=src/frontend run build",
     "start:backend": "npm --workspace=src/backend run start",
-    "test": "npm --workspace=src/backend run test"
+    "test": "npm --workspace=src/backend run test && npm --workspace=src/frontend run test",
+    "test:backend": "npm --workspace=src/backend run test",
+    "test:frontend": "npm --workspace=src/frontend run test"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

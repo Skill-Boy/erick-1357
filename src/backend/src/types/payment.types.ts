@@ -8,7 +8,7 @@ export interface ChargeRequest {
   payerEmail: string;
 }
 
-export type PaymentStatus = 'approved' | 'rejected' | 'error';
+export type PaymentStatus = 'approved' | 'rejected' | 'error'
 
 export interface PaymentResponse {
   id: string;

@@ -1,13 +1,13 @@
-import { defineConfig, loadEnv } from 'vite';
-import { resolve } from 'node:path';
-import react from '@vitejs/plugin-react';
+import { defineConfig, loadEnv } from 'vite'
+import { resolve } from 'node:path'
+import react from '@vitejs/plugin-react'
 
-const rootDirectory = resolve(__dirname, '../..');
+const rootDirectory = resolve(__dirname, '../..')
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, rootDirectory, '');
-  const frontendPort = Number(env.FRONTEND_PORT) || 5173;
-  const backendPort = Number(env.BACKEND_PORT) || 3001;
+  const frontendPort = Number(env.FRONTEND_PORT) || 5173
+  const backendPort = Number(env.BACKEND_PORT) || 3000
 
   return {
     envDir: rootDirectory,
@@ -21,5 +21,5 @@ export default defineConfig(({ mode }) => {
         }
       }
     }
-  };
-});
+  }
+})

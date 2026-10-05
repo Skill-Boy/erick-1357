@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { snailPayController } from '../controllers/snail-pay.controller';
+import { Router } from 'express'
+import { snailPayController } from '../controllers/snail-pay.controller'
 
-const router = Router();
+const router = Router()
 
-router.post('/charges', (req, res, next) => snailPayController.charge(req, res, next));
+router.post('/charges', (req, res, next) => snailPayController.charge(req, res, next))
 
-export default router;
+export default router

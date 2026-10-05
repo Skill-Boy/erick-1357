@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express'
 
 export function errorHandler(
   err: Error,
@@ -10,5 +10,5 @@ export function errorHandler(
   res.status(500).json({
     message: 'Ocurrió un error interno en el servidor.',
     error: process.env.NODE_ENV === 'production' ? undefined : err.message
-  });
+  })
 }

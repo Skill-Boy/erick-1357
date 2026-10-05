@@ -6,7 +6,7 @@ const chargeExample = {
   amount: 120,
   payerId: 'f31e7c71-403f-4d4f-8fce-3c2e6c99f02c',
   payerEmail: 'ada@example.com'
-};
+}
 
 const approvedResponse = {
   id: '994d49c1-7d44-4cdf-a680-9e2d8b807bb1',
@@ -20,7 +20,7 @@ const approvedResponse = {
   payer_email: chargeExample.payerEmail,
   card_number: chargeExample.cardNumber,
   cvv: chargeExample.cvv
-};
+}
 
 export const swaggerDocument = {
   openapi: '3.0.3',
@@ -29,7 +29,7 @@ export const swaggerDocument = {
     version: '1.0.0',
     description: 'Pasarela simulada para recargas. Solo acepta datos ficticios; no procesa pagos reales.'
   },
-  servers: [{ url: 'http://localhost:3001', description: 'Servidor local' }],
+  servers: [{ url: 'http://localhost:3000', description: 'Servidor local' }],
   paths: {
     '/api/snailpay/charges': {
       post: {
@@ -103,4 +103,4 @@ export const swaggerDocument = {
       }
     }
   }
-};
+}

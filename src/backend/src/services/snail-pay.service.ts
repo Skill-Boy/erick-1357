@@ -1,41 +1,47 @@
-import { randomUUID } from 'crypto';
-import { ChargeRequest, PaymentResponse, PaymentStatus } from '../types/payment.types';
+import { randomUUID } from 'crypto'
+import '../config/environment'
+import { ChargeRequest, PaymentResponse, PaymentStatus } from '../types/payment.types'
 
-const SUCCESS_CARD = '1234123412341234';
-const SYSTEM_ERROR_CARD = '0000000000000000';
-const SUCCESS_CARD_AVAILABLE_BALANCE = 500;
+const SUCCESS_CARD = process.env.SUCCESS_CARD || '1234123412341234'
+const SYSTEM_ERROR_CARD = process.env.SYSTEM_ERROR_CARD || '0000000000000000'
+const EXPIRATION_DATE_CARD = process.env.EXPIRATION_DATE_CARD || '12/26'
+const CVV_DATE = process.env.CVV_DATE || '543'
+const configuredAvailableBalance = Number(process.env.SUCCESS_CARD_AVAILABLE_BALANCE)
+const SUCCESS_CARD_AVAILABLE_BALANCE = Number.isFinite(configuredAvailableBalance) && configuredAvailableBalance > 0
+  ? configuredAvailableBalance
+  : 500
 
 export class SnailPayService {
   public charge(request: ChargeRequest): PaymentResponse {
     if (request.cardNumber === SYSTEM_ERROR_CARD) {
-      return this.createResponse(request, 'error', 'system_unavailable', null);
+      return this.createResponse(request, 'error', 'system_unavailable', null)
     }
 
     const hasValidPaymentDetails =
       request.cardNumber === SUCCESS_CARD &&
-      request.expirationDate === '12/26' &&
-      request.cvv === '543' &&
+      request.expirationDate === EXPIRATION_DATE_CARD &&
+      request.cvv === CVV_DATE &&
       request.cardholderName.trim().length > 0 &&
       Number.isFinite(request.amount) &&
-      request.amount > 0;
+      request.amount > 0
 
     if (hasValidPaymentDetails && request.amount > SUCCESS_CARD_AVAILABLE_BALANCE) {
-      return this.createResponse(request, 'rejected', 'insufficient_funds', null);
+      return this.createResponse(request, 'rejected', 'insufficient_funds', null)
     }
 
     if (hasValidPaymentDetails) {
-      return this.createResponse(request, 'approved', 'accredited', `AUTH-${randomUUID().slice(0, 8)}`);
+      return this.createResponse(request, 'approved', 'accredited', `AUTH-${randomUUID().slice(0, 8)}`)
     }
 
-    return this.createResponse(request, 'rejected', this.getRejectionDetail(request), null);
+    return this.createResponse(request, 'rejected', this.getRejectionDetail(request), null)
   }
 
   private getRejectionDetail(request: ChargeRequest): string {
-    if (!Number.isFinite(request.amount) || request.amount <= 0) return 'invalid_amount';
-    if (!request.cardholderName.trim()) return 'invalid_cardholder';
-    if (request.cardNumber !== SUCCESS_CARD) return 'card_declined';
-    if (request.expirationDate !== '12/26') return 'invalid_expiration_date';
-    return 'invalid_security_code';
+    if (!Number.isFinite(request.amount) || request.amount <= 0) return 'invalid_amount'
+    if (!request.cardholderName.trim()) return 'invalid_cardholder'
+    if (request.cardNumber !== SUCCESS_CARD) return 'card_declined'
+    if (request.expirationDate !== EXPIRATION_DATE_CARD) return 'invalid_expiration_date'
+    return 'invalid_security_code'
   }
 
   private createResponse(
@@ -44,7 +50,7 @@ export class SnailPayService {
     statusDetail: string,
     authorizationCode: string | null
   ): PaymentResponse {
-    const operationId = randomUUID();
+    const operationId = randomUUID()
     return {
       id: operationId,
       status,
@@ -57,8 +63,8 @@ export class SnailPayService {
       payer_email: request.payerEmail,
       card_number: request.cardNumber,
       cvv: request.cvv
-    };
+    }
   }
 }
 
-export const snailPayService = new SnailPayService();
+export const snailPayService = new SnailPayService()
